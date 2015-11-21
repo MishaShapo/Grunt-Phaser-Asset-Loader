@@ -99,4 +99,7 @@ module.exports = function(grunt) {
     }
           
   });
+  
+    grunt.registerTask('default',['phaser-asset-loader'])
+
 };

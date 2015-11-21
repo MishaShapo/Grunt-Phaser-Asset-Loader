@@ -1,7 +1,8 @@
 {
-  "name": "phaser-asset-loader",
+  "name": "phaser-tester",
   "version": "0.1.0",
   "devDependencies": {
-    "grunt": "^0.4.5"
+    "grunt": "^0.4.5",
+    "phaser-asset-loader": "^0.2.2"
   }
 }
