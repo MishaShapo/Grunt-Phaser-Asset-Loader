@@ -1,16 +1,28 @@
-module.exports = function(grunt){
+/*
+ * phaser-asset-loader
+ * https://github.com/MishaShapo/Grunt-Phaser-Asset-Loader
+ *
+ * Copyright (c) 2015 Michail Shaposhnikov
+ * Licensed under the MIT license.
+ */
+
+'use strict';
+
+module.exports = function(grunt) {
+
+  // Project configuration.
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
-    phaserAssets : {
+    "phaser-asset-loader" : {
       build: {
         files: {
-          'dest/phaser-asset-code.js' : ['assets/**/*.png','assets/**/*.jpg','assets/**/*.json','assets/**/*.csv','assets/**/*.txt','assets/**/*.ogg','assets/**/*.mp3','assets/**/*.m4a']
+          'dest/phaser-asset-code.js' : ['assets/**/*.png','assets/**/*.jpg','assets/**/*.json','assets/**/*.csv','assets/**/*.txt','assets/**/*.ogg','assets/**/*.mp3','assets/**/*.m4a','assets/**/*.data']
         }
       }
     } 
   });
-
-  grunt.registerMultiTask('phaserAssets', 'Create load commands for Phaser assets', function() {
+  
+  grunt.registerMultiTask('phaser-asset-loader', 'Create load commands for Phaser assets', function() {
     grunt.log.writeln('Starting asset loader')
     try{
     this.files.forEach(function(file){
@@ -46,7 +58,8 @@ module.exports = function(grunt){
           } else if(text.some(function(curVal){return curVal === extension;})){
             type = (isValidType) ? type : "text";
           } else {
-            error = "Unknown extension";
+            if(!isValidType)
+              type = "uknown";
           }
 
           if(loadObjects[name] == null){
