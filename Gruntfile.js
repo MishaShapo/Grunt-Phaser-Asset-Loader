@@ -80,7 +80,7 @@ module.exports = function(grunt) {
       
       keys.forEach(function(cur){
         var asset = loadObjects[cur];
-        contents += "this.load." + asset.type + ".('" + asset.key + "',[";
+        contents += "this.load." + asset.type + "('" + asset.key + "',[";
         asset.urls.forEach(function(cur,index,arr){
           contents += "'" + cur + "'";
           if(index != arr.length-1){
