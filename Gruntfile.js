@@ -80,15 +80,22 @@ module.exports = function(grunt) {
       
       keys.forEach(function(cur){
         var asset = loadObjects[cur];
-        contents += "this.load." + asset.type + "('" + asset.key + "',[";
-        asset.urls.forEach(function(cur,index,arr){
-          contents += "'" + cur + "'";
-          if(index != arr.length-1){
-            contents += ",";
-          }
-        });
+        contents += "this.load." + asset.type + "('" + asset.key + "',";
+        if(asset.urls.length > 1){
+          contents += "[";
+          
+          asset.urls.forEach(function(cur,index,arr){
+            contents += "'" + cur + "'";
+            if(index != arr.length-1){
+              contents += ",";
+            }
+          });
+          
+          contents += "]);\n";
+        } else {
+          contents += "'" + asset.urls[0] + "');\n";
+        }
         
-        contents += ']);\n';
       });
       grunt.file.write(out, contents);
       grunt.verbose.ok();
